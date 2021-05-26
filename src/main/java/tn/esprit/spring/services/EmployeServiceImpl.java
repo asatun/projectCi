@@ -69,9 +69,7 @@ public class EmployeServiceImpl implements IEmployeService {
 				employes.add(employeManagedEntity);
 				depManagedEntity.setEmployes(employes);
 			} else {
-
 				depManagedEntity.getEmployes().add(employeManagedEntity);
-
 			}
 
 		}
