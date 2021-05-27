@@ -38,10 +38,13 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	}
     
 	public void affecterMissionADepartement(int missionId, int depId) {
-		Mission mission = missionRepository.findById(missionId).get();
-		Departement dep = deptRepoistory.findById(depId).get();
-		mission.setDepartement(dep);
+		Mission mission = missionRepository.findById(missionId).orElse(null);
+		Departement dep = deptRepoistory.findById(depId).orElse(null);
+		if(dep != null && mission != null) {
+			mission.setDepartement(dep);
 		missionRepository.save(mission);
+		}
+		
 		
 	}
 
@@ -62,21 +65,27 @@ public class TimesheetServiceImpl implements ITimesheetService {
 	
 	public void validerTimesheet(int missionId, int employeId, Date dateDebut, Date dateFin, int validateurId) {
 		System.out.println("In valider Timesheet");
-		Employe validateur = employeRepository.findById(validateurId).get();
-		Mission mission = missionRepository.findById(missionId).get();
+		Employe validateur = employeRepository.findById(validateurId).orElse(null);
+		Mission mission = missionRepository.findById(missionId).orElse(null);
 		//verifier s'il est un chef de departement (interet des enum)
-		if(!validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
+		if(validateur !=null) {
+			if(!validateur.getRole().equals(Role.CHEF_DEPARTEMENT)){
 			System.out.println("l'employe doit etre chef de departement pour valider une feuille de temps !");
 			return;
 		}
+		}
+		
 		//verifier s'il est le chef de departement de la mission en question
 		boolean chefDeLaMission = false;
-		for(Departement dep : validateur.getDepartements()){
+		if(validateur !=null && mission!=null ) {
+				for(Departement dep : validateur.getDepartements()){
 			if(dep.getId() == mission.getDepartement().getId()){
 				chefDeLaMission = true;
 				break;
 			}
 		}
+		}
+	
 		if(!chefDeLaMission){
 			System.out.println("l'employe doit etre chef de departement de la mission en question");
 			return;
