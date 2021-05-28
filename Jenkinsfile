@@ -1,32 +1,25 @@
 pipeline {
-   agent any
+    agent any
+        stages{
 
-  stages {
-
-    stage("Build") {
-      steps {
-
-        echo 'running build step ...'
-
-      }
-    }
-
-      stage("Test") {
-      steps {
-
-        echo 'running test step ...'
-
-      }
-    }
-
-      stage("Deploy") {
-      steps {
-
-        echo 'running deployement step ...'
-
-      }
-    }
-
-  }
-   
+            stage('Maven and Sonar'){
+            
+            parallel{
+            stage('Sonar Analysis'){
+                steps{
+                    withSonarQubeEnv('sonar') {
+                        bat 'mvn sonar:sonar'
+                    }
+                }
+            }
+            
+             stage('Mvn Build'){
+                steps{
+                    bat 'mvn clean package'
+                }
+            }
+     
+        }   
+        }
+        }
 }
