@@ -7,7 +7,7 @@ pipeline {
             parallel{
             stage('Sonar Analysis'){
                 steps{
-                    withSonarQubeEnv('Sonar') {
+                    withSonarQubeEnv('sonar') {
                         bat 'mvn sonar:sonar'
                     }
                 }
