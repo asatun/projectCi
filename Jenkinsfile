@@ -2,7 +2,7 @@ pipeline {
     agent any
         stages{
 
-            stage('Maven and Sonar'){
+            stage('Maven and sonar'){
             
             parallel{
             stage('Sonar Analysis'){
