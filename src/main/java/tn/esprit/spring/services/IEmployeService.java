@@ -5,6 +5,7 @@ import java.util.List;
 
 import tn.esprit.spring.entities.Contrat;
 import tn.esprit.spring.entities.ContratDTO;
+import tn.esprit.spring.entities.Departement;
 import tn.esprit.spring.entities.Employe;
 import tn.esprit.spring.entities.EmployeDTO;
 import tn.esprit.spring.entities.Entreprise;
@@ -14,9 +15,11 @@ import tn.esprit.spring.entities.Timesheet;
 
 public interface IEmployeService {
 	
+	
+	public int countEmploye();
 	public int ajouterEmploye(Employe empEntity);
 	public void mettreAjourEmailByEmployeId(String email, int employeId);
-	public void affecterEmployeADepartement(int employeId, int depId);
+	public boolean affecterEmployeADepartement(int employeId, int depId);
 	public void desaffecterEmployeDuDepartement(int employeId, int depId);
 	public int ajouterContrat(Contrat contrat);
 	public void affecterContratAEmploye(int contratId, int employeId);
@@ -33,6 +36,7 @@ public interface IEmployeService {
 	public List<Employe> getAllEmployes();
 	public List<Timesheet> getTimesheetsByMissionAndDate(Employe employe, Mission mission, 
 	Date dateDebut, Date dateFin);
+	public int ajouterDepartement(Departement dep);
 	
 	
 	

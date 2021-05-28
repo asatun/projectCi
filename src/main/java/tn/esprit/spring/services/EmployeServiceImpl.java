@@ -38,14 +38,18 @@ public class EmployeServiceImpl implements IEmployeService {
 	@Autowired
 	TimesheetRepository timesheetRepository;
 
-	public void testlog() {
-		logger.info("test log ....////");
 
-	}
 
 	public int ajouterEmploye(Employe employe) {
+		logger.info(" Methode : ajouterEmploye");
 		employeRepository.save(employe);
 		return employe.getId();
+	}
+	
+	public int ajouterDepartement(Departement dep) {
+		logger.info(" Methode : ajouterEmploye");
+		deptRepoistory.save(dep);
+		return dep.getId();
 	}
 
 	public void mettreAjourEmailByEmployeId(String email, int employeId) {
@@ -58,7 +62,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 
 	@Transactional
-	public void affecterEmployeADepartement(int employeId, int depId) {
+	public boolean affecterEmployeADepartement(int employeId, int depId) {
 		Departement depManagedEntity = deptRepoistory.findById(depId).orElse(null);
 		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
 
@@ -68,11 +72,14 @@ public class EmployeServiceImpl implements IEmployeService {
 				List<Employe> employes = new ArrayList<>();
 				employes.add(employeManagedEntity);
 				depManagedEntity.setEmployes(employes);
+				return true;
 			} else {
 				depManagedEntity.getEmployes().add(employeManagedEntity);
+				return true;
 			}
 
 		}
+		return false;
 
 	}
 
@@ -181,6 +188,12 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	public List<Employe> getAllEmployes() {
 		return (List<Employe>) employeRepository.findAll();
+	}
+
+	@Override
+	public int countEmploye() {
+		logger.info(" Methode : countEmploye");
+		return (int) employeRepository.count();
 	}
 
 }
