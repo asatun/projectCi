@@ -41,5 +41,19 @@ pipeline {
                         version: '1.0'
                  }
              }
+            
+            // Email notification
+             stage('Email Notifications'){
+                 steps{
+                 mail bcc: '', body: '''Hello , 
+
+                A new Build has been added !
+               
+                ''', 
+                cc: '', from: '', replyTo: '', subject: 'Build', to: 'ahmed.8.ca@gmail.com'
+             
+                 }
+                 }
+            
         }
 }
