@@ -22,9 +22,24 @@ pipeline {
         }  
                 //end parallel stages
                 
-                //start  uploading nexus
+               
                 
                    
         }
+             //start  uploading nexus
+               stage('uploading to nexus'){
+                 steps{
+                     nexusArtifactUploader artifacts: [
+                        [artifactId: 'Timesheet-spring-boot-core-data-jpa-mvc-REST-1',
+                        classifier: '', 
+                        file: 'target/Timesheet-spring-boot-core-data-jpa-mvc-REST-1-1.0.war', 
+                        type: 'war']], credentialsId: 'nexus3', groupId: 'tn.esprit.spring', 
+                        nexusUrl: 'localhost:8081', 
+                        nexusVersion: 'nexus3', 
+                        protocol: 'http', 
+                        repository: 'maven-releases/', 
+                        version: '1.0'
+                 }
+             }
         }
 }
