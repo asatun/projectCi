@@ -73,7 +73,7 @@ pipeline {
 
             }
 
-                  FAILURE {
+                  failure {
                          // Email notification success build 
            
                  
