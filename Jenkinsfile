@@ -38,7 +38,7 @@ pipeline {
              //start  uploading nexus
                stage('Deploiement sur  Nexus'){
                  steps{
-                     echo "deploiement de la version  {$VERSION} "
+                     echo "deploiement de la version  {params.$VERSION} "
                      nexusArtifactUploader artifacts: [
                         [artifactId: 'Timesheet-spring-boot-core-data-jpa-mvc-REST-1',
                         classifier: '', 
