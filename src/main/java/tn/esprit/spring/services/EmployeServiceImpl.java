@@ -47,7 +47,7 @@ public class EmployeServiceImpl implements IEmployeService {
 	}
 	
 	public int ajouterDepartement(Departement dep) {
-		logger.info(" Methode : ajouterEmploye");
+		logger.info(" Methode : ajouterDepartement");
 		deptRepoistory.save(dep);
 		return dep.getId();
 	}
@@ -63,24 +63,32 @@ public class EmployeServiceImpl implements IEmployeService {
 
 	@Transactional
 	public boolean affecterEmployeADepartement(int employeId, int depId) {
+		logger.info(" ************* Methode : affecterEmployeADepartement");
+		
 		Departement depManagedEntity = deptRepoistory.findById(depId).orElse(null);
 		Employe employeManagedEntity = employeRepository.findById(employeId).orElse(null);
 
 		if (depManagedEntity != null) {
+			
+			logger.info(" ************* Methode : depManagedEntity != null");
 			if (depManagedEntity.getEmployes() == null) {
+				logger.info(" ************* Methode : depManagedEntity.getEmployes() == null");
 
 				List<Employe> employes = new ArrayList<>();
 				employes.add(employeManagedEntity);
 				depManagedEntity.setEmployes(employes);
 				return true;
 			} else {
+				logger.info(" ************* Methode : depManagedEntity.getEmployes() != null");
 				depManagedEntity.getEmployes().add(employeManagedEntity);
 				return true;
 			}
 
 		}
+		
+		logger.info(" ************* Methode : sortie de la condition IF return false");
 		return false;
-
+	
 	}
 
 	@Transactional
