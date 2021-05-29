@@ -50,7 +50,7 @@ pipeline {
 
             success {
                          // Email notification success build 
-            stage('Notification par Email'){
+            
                  steps{
                  mail bcc: '', body: '''Bonjour , 
                 etat de dernier buils : SUCCESS !!
@@ -61,11 +61,11 @@ pipeline {
                  }
                  }
 
-            }
+           
 
                   failure {
                          // Email notification success build 
-            stage('Notification par Email'){
+            
                  steps{
                  mail bcc: '', body: '''Bonjour , 
                 etat de dernier buils : FAILURE !!
@@ -74,7 +74,7 @@ pipeline {
                 cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
              
                  }
-                 }
+                
 
             }
         }
