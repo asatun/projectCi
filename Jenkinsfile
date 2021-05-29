@@ -2,10 +2,10 @@ pipeline {
     agent any
         stages{
 
-            stage('Maven and sonar'){
+            stage('Build et test Statique Sonar'){
             
             parallel{
-            stage('Sonar Analysis'){
+            stage('test Statique Sonar'){
                 steps{
                     withSonarQubeEnv('sonar') {
                         bat 'mvn sonar:sonar'
@@ -13,7 +13,7 @@ pipeline {
                 }
             }
             
-             stage('Mvn Build'){
+             stage('Maven -Build'){
                 steps{
                     bat 'mvn clean package -DskipTests'
                 }
@@ -27,7 +27,7 @@ pipeline {
                    
         }
              //start  uploading nexus
-               stage('uploading to nexus'){
+               stage('Téléchargement vers Nexus'){
                  steps{
                      nexusArtifactUploader artifacts: [
                         [artifactId: 'Timesheet-spring-boot-core-data-jpa-mvc-REST-1',
@@ -43,15 +43,15 @@ pipeline {
              }
             
             // Email notification
-            stage('Email Notifications'){
+            stage('Notification par Email'){
                  steps{
-                 mail bcc: '', body: '''Hello , 
+                 mail bcc: '', body: '''Bonjour , 
 
-                $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!
+                Le Build de votre projet 'PipeLine' est terminé , veuillez vérifier le rapport Sonar et l'état de build
 
-                Best Regards , 
-                Bouhmid''', 
-                cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'A Build was executed on timesheet', to: 'ahmed.8.ca@gmail.com'
+                Bonne journée , 
+                --Arfaoui Ahmed''', 
+                cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
              
                  }
                  }
