@@ -51,14 +51,14 @@ pipeline {
             success {
                          // Email notification success build 
             
-                 steps{
+              
                  mail bcc: '', body: '''Bonjour , 
                 etat de dernier buils : SUCCESS !!
                 Bonne journée , 
                 --Arfaoui Ahmed''', 
                 cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
              
-                 }
+                
                  }
 
            
@@ -66,16 +66,14 @@ pipeline {
                   failure {
                          // Email notification success build 
             
-                 steps{
+                
                  mail bcc: '', body: '''Bonjour , 
                 etat de dernier buils : FAILURE !!
                 Bonne journée , 
                 --Arfaoui Ahmed''', 
                 cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
              
-                 }
-                
-
+              
             }
         }
 
