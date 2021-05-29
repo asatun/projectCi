@@ -31,7 +31,7 @@ pipeline {
                            sh 'mvn clean package '
                     } else {
                         echo 'Build   (sans !!)  Execution des tests unitaires encours ...'
-                           sh 'mvn clean package -D '
+                           sh 'mvn clean package -DskipTests'
                     }
                       
                       }
