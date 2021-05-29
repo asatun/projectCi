@@ -60,31 +60,31 @@ pipeline {
 
             success {
                          // Email notification success build 
-            stage('Notification par Email'){
-                 steps{
+           
+             
                  mail bcc: '', body: '''Bonjour , 
                 etat de dernier build : SUCCESS !!
                 Bonne journee , 
                 --Arfaoui Ahmed''', 
                 cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
              
-                 }
-                 }
+                
+               
 
             }
 
                   FAILURE {
                          // Email notification success build 
-            stage('Notification par Email'){
-                 steps{
+           
+                 
                  mail bcc: '', body: '''Bonjour , 
                 etat de dernier build : FAILURE !!
                 Bonne journee , 
                 --Arfaoui Ahmed''', 
                 cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
              
-                 }
-                 }
+               
+                
 
             }
         }
