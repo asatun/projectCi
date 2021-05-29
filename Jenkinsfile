@@ -27,7 +27,7 @@ pipeline {
                    
         }
              //start  uploading nexus
-               stage('Téléchargement vers Nexus'){
+               stage('Telechargement vers Nexus'){
                  steps{
                      nexusArtifactUploader artifacts: [
                         [artifactId: 'Timesheet-spring-boot-core-data-jpa-mvc-REST-1',
@@ -47,7 +47,7 @@ pipeline {
                  steps{
                  mail bcc: '', body: '''Bonjour , 
 
-                Le Build de votre projet 'PipeLine' est terminé , veuillez vérifier le rapport Sonar et l'état de build
+                Le Build de votre projet 'PipeLine' est termine , veuillez vérifier le rapport Sonar et l'etat de build
 
                 Bonne journée , 
                 --Arfaoui Ahmed''', 
