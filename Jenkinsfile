@@ -8,14 +8,14 @@ pipeline {
             stage('test Statique Sonar'){
                 steps{
                     withSonarQubeEnv('sonar') {
-                        bat 'mvn sonar:sonar'
+                        sh 'mvn sonar:sonar'
                     }
                 }
             }
             
              stage('Maven -Build'){
                 steps{
-                    bat 'mvn clean package -DskipTests'
+                    sh 'mvn clean package -DskipTests'
                 }
             }
              
