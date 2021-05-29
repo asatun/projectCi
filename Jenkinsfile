@@ -47,11 +47,11 @@ pipeline {
                  steps{
                  mail bcc: '', body: '''Hello , 
 
-                A Build has been executed on Your Project Timesheet , if you notice any bugs or abnormal behaviour please contact your team leader
+                $PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS!
 
                 Best Regards , 
                 Bouhmid''', 
-                cc: '', from: '', replyTo: '', subject: 'A Build was executed on timesheet', to: 'ahmed.8.ca@gmail.com'
+                cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'A Build was executed on timesheet', to: 'ahmed.8.ca@gmail.com'
              
                  }
                  }
