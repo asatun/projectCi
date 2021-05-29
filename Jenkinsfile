@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string (name : 'BRANCH' , description : 'Quelle branche voulez-vous déployer ?')
+        string (name : 'BRANCH' , description : 'Quelle branche voulez-vous deployer ?')
         string (name : 'VERSION' , description : 'Version de lArtifact')
         booleanParam(name : 'executerTest', defaultValue:true, description : 'voulez-vous executer les tests ? ')
     }
@@ -70,6 +70,8 @@ pipeline {
              
                  mail bcc: '', body: '''Bonjour , 
                 etat de dernier build : SUCCESS !!
+                BRANCHE : ${BRANCH},
+                Version de livrable : ${VERSION},
                 Bonne journee , 
                 --Arfaoui Ahmed''', 
                 cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
