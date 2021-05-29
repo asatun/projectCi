@@ -36,18 +36,8 @@ pipeline {
                       
                       }
                   }
-                  //
-                  when {
-                      expression {
-                          params.executerTest
-                      }
-
-                  }
-
-                steps{
-                    echo 'Build et Execution des tests unitaires encours ...'
-                    sh 'mvn clean package -DskipTests'
-                }
+                 
+           
             }
 
               // end build 
