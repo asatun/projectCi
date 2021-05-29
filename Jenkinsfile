@@ -42,19 +42,42 @@ pipeline {
                  }
              }
             
-            // Email notification
+  
+            
+        }
+
+        post {
+
+            success {
+                         // Email notification success build 
             stage('Notification par Email'){
                  steps{
                  mail bcc: '', body: '''Bonjour , 
-
-                Le Build de votre projet 'PipeLine' est termine , veuillez vérifier le rapport Sonar et l'etat de build
-
+                etat de dernier buils : SUCCESS !!
                 Bonne journée , 
                 --Arfaoui Ahmed''', 
                 cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
              
                  }
                  }
-            
+
+            }
+
+                  FAILURE {
+                         // Email notification success build 
+            stage('Notification par Email'){
+                 steps{
+                 mail bcc: '', body: '''Bonjour , 
+                etat de dernier buils : FAILURE !!
+                Bonne journée , 
+                --Arfaoui Ahmed''', 
+                cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
+             
+                 }
+                 }
+
+            }
         }
+
+         
 }
