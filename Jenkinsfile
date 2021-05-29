@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string (name : 'BRANCH' , description : 'Quelle branche voulez-vous déployer ?')
-        string (name : 'VERSION' , description : 'Version de l'Artifact')
+        string (name : 'VERSION' , description : 'Version de lArtifact')
         booleanParam(name : 'executerTest', defaultValue:false, description : 'voulez-vous executer les tests ? ')
     }
         stages{
