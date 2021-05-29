@@ -1,6 +1,7 @@
 pipeline {
     agent any
     parameters {
+           string (name : 'TTT' , description : 'ttttttt')
         string (name : 'BRANCH' , description : 'Quelle branche voulez-vous deployer ?')
         string (name : 'VERSION' , description : 'Version de lArtifact')
         booleanParam(name : 'executerTest', defaultValue:true, description : 'voulez-vous executer les tests ? ')
