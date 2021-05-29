@@ -1,34 +1,44 @@
 pipeline {
     agent any
+    parameters {
+        string (name : 'BRANCH' , description : 'Quelle branche voulez-vous déployer ?')
+        string (name : 'VERSION' , description : 'Version de l'Artifact')
+        booleanParam(name : 'executerTest', defaultValue:false, description : 'voulez-vous executer les tests ? ')
+    }
         stages{
 
-            stage('Build et test Statique Sonar'){
+            stage('Test statique  : Sonar'){
             
-            parallel{
-            stage('test Statique Sonar'){
+          
+           
                 steps{
                     withSonarQubeEnv('sonar') {
                         sh 'mvn sonar:sonar'
                     }
                 }
-            }
-            
-             stage('Maven -Build'){
+                        
+                                 
+        }
+
+              stage('Maven -Build'){
+                  when {
+                      expression {
+                          params.executerTest
+                      }
+
+                  }
+
                 steps{
-                    sh 'mvn clean package -DskipTests'
+                    echo 'Build et Execution des tests unitaires encours ...'
+                    sh 'mvn clean package ' {$VERSION}
                 }
             }
-             
-        }  
-                //end parallel stages
-                
-               
-                
-                   
-        }
+
+
              //start  uploading nexus
-               stage('Telechargement vers Nexus'){
+               stage('Deploiement sur  Nexus'){
                  steps{
+                     deploiement de la version 
                      nexusArtifactUploader artifacts: [
                         [artifactId: 'Timesheet-spring-boot-core-data-jpa-mvc-REST-1',
                         classifier: '', 
@@ -50,30 +60,32 @@ pipeline {
 
             success {
                          // Email notification success build 
-            
-              
+            stage('Notification par Email'){
+                 steps{
                  mail bcc: '', body: '''Bonjour , 
-                etat de dernier buils : SUCCESS !!
-                Bonne journée , 
+                etat de dernier build : SUCCESS !!
+                Bonne journee , 
                 --Arfaoui Ahmed''', 
                 cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
              
-                
+                 }
                  }
 
-           
+            }
 
-                  failure {
+                  FAILURE {
                          // Email notification success build 
-            
-                
+            stage('Notification par Email'){
+                 steps{
                  mail bcc: '', body: '''Bonjour , 
-                etat de dernier buils : FAILURE !!
-                Bonne journée , 
+                etat de dernier build : FAILURE !!
+                Bonne journee , 
                 --Arfaoui Ahmed''', 
                 cc: '', from: 'ahmed.8.ca@gmail.com', replyTo: '', subject: 'Resultat de dernier Pipe line', to: 'ahmed.8.ca@gmail.com'
              
-              
+                 }
+                 }
+
             }
         }
 
