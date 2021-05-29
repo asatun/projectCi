@@ -1,6 +1,7 @@
 package tn.esprit.spring.services.test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -40,21 +41,21 @@ public class EmployeServiceImplTest {
 	@Test
 	public void testAjouterEmployeFailure() {
 		logger.info(" testing methode testAjouterEmploye (Failure).... ");
-		assertNotEquals(2, employeServiceImpl.ajouterEmploye(new Employe("testNom", "testPrenom", "test@ff.com", true, null)));
+		assertNotEquals(3, employeServiceImpl.ajouterEmploye(new Employe("testNom", "testPrenom", "test@ff.com", true, null)));
 					
 	}
 	
 	@Test
 	public void testCountEmployeSuccess() {
 		logger.info(" testing methode testCountEmploye (Success) .... ");
-		assertEquals(1, employeServiceImpl.countEmploye());
+		assertEquals(2, employeServiceImpl.countEmploye());
 						
 	}
 	
 	@Test
 	public void testCountEmployeFailure() {
 		logger.info(" testing methode testCountEmploye (Failure) .... ");
-		assertEquals(3, employeServiceImpl.countEmploye());
+		assertNotEquals(3, employeServiceImpl.countEmploye());
 						
 	}
 	
@@ -68,14 +69,14 @@ public class EmployeServiceImplTest {
 	@Test
 	public void testAffecterEmployeADepartementSuccess() {
 		logger.info(" testing methode testAffecterEmployeADepartement (Success) .... ");
-		assertTrue( "affectation reussi ", employeServiceImpl.affecterEmployeADepartement(1, 1));
+		assertTrue( "affectation reussi ", employeServiceImpl.affecterEmployeADepartement(2, 1));
 						
 	}
 	
 	@Test
 	public void testAffecterEmployeADepartementFailure() {
 		logger.info(" testing methode testAffecterEmployeADepartement (Failure) .... ");
-		assertTrue( "affectation échoué ", employeServiceImpl.affecterEmployeADepartement(0,0));
+		assertFalse( "affectation échoué ", employeServiceImpl.affecterEmployeADepartement(0,0));
 						
 	}
 	
