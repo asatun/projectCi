@@ -19,8 +19,24 @@ pipeline {
                         
                                  
         }
+            
+            //build 
 
               stage('Maven -Build'){
+                  steps {
+                  
+                      script {
+                          if (params.executerTest == true) {
+                        echo 'Build et Execution des tests unitaires encours ...'
+                           sh 'mvn clean package '
+                    } else {
+                        echo 'Build   (sans !!)  Execution des tests unitaires encours ...'
+                           sh 'mvn clean package -D '
+                    }
+                      
+                      }
+                  }
+                  //
                   when {
                       expression {
                           params.executerTest
@@ -30,11 +46,11 @@ pipeline {
 
                 steps{
                     echo 'Build et Execution des tests unitaires encours ...'
-                    sh 'mvn clean package '
+                    sh 'mvn clean package -DskipTests'
                 }
             }
 
-
+              // end build 
              //start  uploading nexus
                stage('Deploiement sur  Nexus'){
                  steps{
