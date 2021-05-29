@@ -63,7 +63,7 @@ pipeline {
 
             }
 
-                  FAILURE {
+                  failure {
                          // Email notification success build 
             stage('Notification par Email'){
                  steps{
