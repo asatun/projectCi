@@ -30,7 +30,7 @@ pipeline {
 
                 steps{
                     echo 'Build et Execution des tests unitaires encours ...'
-                    sh 'mvn clean package ' {$VERSION}
+                    sh 'mvn clean package '
                 }
             }
 
@@ -38,7 +38,7 @@ pipeline {
              //start  uploading nexus
                stage('Deploiement sur  Nexus'){
                  steps{
-                     deploiement de la version 
+                     echo "deploiement de la version  {$VERSION} "
                      nexusArtifactUploader artifacts: [
                         [artifactId: 'Timesheet-spring-boot-core-data-jpa-mvc-REST-1',
                         classifier: '', 
